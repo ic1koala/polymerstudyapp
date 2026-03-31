@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#050a14">
+  <title>Polymer Academy | 樹脂重合学習アプリ</title>
+  <meta name="description" content="文系営業向け・樹脂重合技術を100日で習得するモバイル学習SPAアプリ。クイズ・ロジックツリー・進捗管理機能付き。">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Mermaid.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Animated Background -->
+<div class="bg-animated" aria-hidden="true">
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+</div>
+
+<!-- App Shell -->
+<div id="app">
+
+  <!-- Header -->
+  <header id="app-header" role="banner">
+    <span class="header-title">⚗️ Polymer Academy</span>
+    <span class="header-badge">100日チャレンジ</span>
+  </header>
+
+  <!-- Tab Content -->
+  <main id="tab-content" role="main">
+
+    <!-- ══════════════════════════════════════
+         Tab 1: Learn
+         ══════════════════════════════════════ -->
+    <section id="tab-learn" class="tab-panel active" aria-label="読む学習モード">
+      <p class="section-label">学習ステップ</p>
+      <p class="text-xs text-slate-500 mb-4 px-1">タップして展開 · 上から順に学習を進めよう</p>
+
+      <!-- Step 1: 中学レベル -->
+      <div class="learn-step-card" id="step-card-1">
+        <div class="learn-step-header" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="step-body-1">
+          <div class="step-badge step-badge-1">⚛️</div>
+          <div class="step-meta">
+            <div class="step-level">Step 1 · 中学生レベル</div>
+            <div class="step-title">原子・分子・結合の超基本</div>
+          </div>
+          <span class="step-chevron">›</span>
+        </div>
+        <div class="learn-step-body" id="step-body-1">
+          <div class="learn-step-content">
+            <h3>🔬 原子とは何か？</h3>
+            <p>すべての物質は<strong style="color:#93c5fd">「原子（げんし）」</strong>という非常に小さな粒でできています。原子は物質を構成する最小の単位で、肉眼では絶対に見えません。代表的な原子には次のものがあります。</p>
+            <ul>
+              <li><strong>炭素（C）</strong>：有機物の骨格。生命や石油製品の基本。</li>
+              <li><strong>水素（H）</strong>：最も軽い原子。水や油に含まれる。</li>
+              <li><strong>酸素（O）</strong>：空気の約21%。燃焼や呼吸に必要。</li>
+              <li><strong>窒素（N）</strong>：空気の約78%。タンパク質を構成。</li>
+            </ul>
+            <h3>🔗 分子と化学結合</h3>
+            <p>原子同士が手をつないで結びついたものを<strong style="color:#93c5fd">「分子（ぶんし）」</strong>と呼びます。たとえば水（H₂O）は水素2個と酸素1個が結合した分子です。</p>
+            <div class="info-box">
+              <p>💡 <strong>共有結合とは？</strong><br>原子同士が電子（でんし）を共有することで生まれる非常に強い結合。プラスチックの強さはこの結合が無数に並ぶからです。</p>
+            </div>
+            <h3>📦 元素周期表のポイント</h3>
+            <p>化学の教科書でよく見る「元素周期表」は原子を種類別に並べた表です。樹脂（プラスチック）は主に炭素（C）・水素（H）・酸素（O）の3種類の原子からできています。</p>
+            <div>
+              <span class="keyword-chip">原子</span>
+              <span class="keyword-chip">分子</span>
+              <span class="keyword-chip">共有結合</span>
+              <span class="keyword-chip">炭素C</span>
+              <span class="keyword-chip">水素H</span>
+              <span class="keyword-chip">酸素O</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: 高校レベル -->
+      <div class="learn-step-card" id="step-card-2">
+        <div class="learn-step-header" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="step-body-2">
+          <div class="step-badge step-badge-2">🧪</div>
+          <div class="step-meta">
+            <div class="step-level">Step 2 · 高校生レベル</div>
+            <div class="step-title">有機化学の基礎・ポリマーとは</div>
+          </div>
+          <span class="step-chevron">›</span>
+        </div>
+        <div class="learn-step-body" id="step-body-2">
+          <div class="learn-step-content">
+            <h3>🌿 有機化学とは</h3>
+            <p>炭素（C）を骨格とする化合物を<strong style="color:#67e8f9">「有機化合物」</strong>と呼び、これを研究する学問が<strong style="color:#67e8f9">有機化学</strong>です。石油・天然ガスから取れる化合物（エチレン、プロピレン等）が樹脂の原料となります。</p>
+            <h3>🔁 ポリマー（高分子）の定義</h3>
+            <p><strong style="color:#67e8f9">ポリマー（polymer）</strong>とはギリシャ語で「多くの単位（poly + mer）」を意味します。小さな分子（モノマー＝単量体）が数百〜数万個繋がった巨大な分子が「ポリマー＝高分子」です。</p>
+            <div class="info-box">
+              <p>🎯 <strong>イメージで覚える！</strong><br>モノマーはレゴブロック1個。ポリマーはそのブロックを何千個も繋げた長い鎖。鎖の長さ（重合度）が長いほど強くて丈夫な材料になります。</p>
+            </div>
+            <h3>🏭 身近なポリマー（プラスチック）</h3>
+            <ul>
+              <li><strong>PE（ポリエチレン）</strong>：レジ袋・ペットボトルのフタ</li>
+              <li><strong>PP（ポリプロピレン）</strong>：食品容器・マスク</li>
+              <li><strong>PET（ポリエチレンテレフタレート）</strong>：ペットボトル</li>
+              <li><strong>PMMA（ポリメタクリル酸メチル）</strong>：アクリル板・水槽</li>
+            </ul>
+            <div>
+              <span class="keyword-chip">有機化合物</span>
+              <span class="keyword-chip">モノマー</span>
+              <span class="keyword-chip">ポリマー</span>
+              <span class="keyword-chip">重合度</span>
+              <span class="keyword-chip">PE</span>
+              <span class="keyword-chip">PP</span>
+              <span class="keyword-chip">PMMA</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 3: 大学レベル -->
+      <div class="learn-step-card" id="step-card-3">
+        <div class="learn-step-header" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="step-body-3">
+          <div class="step-badge step-badge-3">⚗️</div>
+          <div class="step-meta">
+            <div class="step-level">Step 3 · 大学生レベル</div>
+            <div class="step-title">ラジカル・付加・縮合重合のメカニズム</div>
+          </div>
+          <span class="step-chevron">›</span>
+        </div>
+        <div class="learn-step-body" id="step-body-3">
+          <div class="learn-step-content">
+            <h3>🔗 付加重合（Addition Polymerization）</h3>
+            <p>炭素-炭素二重結合（C=C）を持つモノマーが、二重結合を開きながら次々と連結する反応。<strong style="color:#c4b5fd">副生成物なし</strong>でモノマーの分子量がそのままポリマーに移行します。</p>
+            <ul>
+              <li>例：エチレン → ポリエチレン（PE）</li>
+              <li>例：スチレン → ポリスチレン（PS）</li>
+              <li>例：MMA → PMMA（アクリル板）</li>
+            </ul>
+            <h3>⚡ ラジカル重合のメカニズム</h3>
+            <p>最も一般的な付加重合。3段階で進みます：</p>
+            <ul>
+              <li><strong>開始（Initiation）</strong>：開始剤が熱・光で分解しラジカル（不対電子をもつ活性種）を生成</li>
+              <li><strong>成長（Propagation）</strong>：ラジカルがモノマーに次々と付加し鎖が伸長</li>
+              <li><strong>停止（Termination）</strong>：ラジカル同士が結合・不均化して反応終了</li>
+            </ul>
+            <div class="info-box">
+              <p>🎯 <strong>ラジカルとは？</strong><br>対になっていない電子（不対電子）を持つ非常に反応性の高い化学種。この不安定さがモノマーを連続的に取り込む原動力です。</p>
+            </div>
+            <h3>💧 縮合重合（Condensation Polymerization）</h3>
+            <p>2つの官能基（-OH, -COOH, -NH₂ など）が反応するたびに<strong style="color:#c4b5fd">水・アルコールなどの副生成物</strong>を放出しながら結合する重合。</p>
+            <ul>
+              <li>例：ナイロン（ポリアミド）：ジアミン＋ジカルボン酸 → 水が出る</li>
+              <li>例：PET（ポリエステル）：エチレングリコール＋テレフタル酸 → 水が出る</li>
+            </ul>
+            <h3>🎛️ その他の重合方式</h3>
+            <ul>
+              <li><strong>カチオン重合・アニオン重合</strong>：イオンが活性種。制御性が高い。</li>
+              <li><strong>乳化重合</strong>：水中・ミセル内で行う。塗料・合成ゴムに利用。</li>
+              <li><strong>リビングラジカル重合</strong>：分子量・末端を精密制御。RAFT・ATRP法など。</li>
+            </ul>
+            <div>
+              <span class="keyword-chip">付加重合</span>
+              <span class="keyword-chip">ラジカル</span>
+              <span class="keyword-chip">縮合重合</span>
+              <span class="keyword-chip">開始剤</span>
+              <span class="keyword-chip">乳化重合</span>
+              <span class="keyword-chip">RAFT</span>
+              <span class="keyword-chip">ATRP</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: 実用・ニュース -->
+      <div class="learn-step-card" id="step-card-4">
+        <div class="learn-step-header" role="button" tabindex="0"
+             aria-expanded="false" aria-controls="step-body-4">
+          <div class="step-badge step-badge-4">🏢</div>
+          <div class="step-meta">
+            <div class="step-level">Step 4 · 実用・業界知識</div>
+            <div class="step-title">アクリル樹脂の用途・市場動向</div>
+          </div>
+          <span class="step-chevron">›</span>
+        </div>
+        <div class="learn-step-body" id="step-body-4">
+          <div class="learn-step-content">
+            <h3>🏭 アクリル樹脂（PMMA）の主な用途</h3>
+            <ul>
+              <li><strong>建材・サイン</strong>：看板、ディスプレイ、内外装パネル</li>
+              <li><strong>光学部品</strong>：レンズ、光ファイバー、液晶バックライト</li>
+              <li><strong>医療</strong>：コンタクトレンズ、人工骨頭、歯科材料</li>
+              <li><strong>自動車</strong>：テールランプカバー、ヘッドランプ</li>
+              <li><strong>水族館・水槽</strong>：強化アクリル板（水圧に耐える）</li>
+            </ul>
+            <h3>📊 市場動向・トレンド（2024〜2026年）</h3>
+            <p>グローバルのアクリル樹脂市場は年率5〜6%成長が続き、2026年には約200億ドル規模と予測されています。成長ドライバーは以下のとおりです：</p>
+            <ul>
+              <li>🌱 <strong>バイオベース原料</strong>：石油依存脱却のため、サトウキビ由来のバイオMMAの研究開発が加速</li>
+              <li>🔋 <strong>EV・自動車軽量化</strong>：アクリル樹脂を使った軽量ガラス代替材の需要増</li>
+              <li>♻️ <strong>リサイクル技術</strong>：加熱解重合（モノマー回収率95%以上）による循環経済対応</li>
+              <li>🖥️ <strong>ディスプレイ材料</strong>：OLED・ミニLEDバックライト向け光拡散板の需要増</li>
+            </ul>
+            <div class="info-box">
+              <p>📌 <strong>営業で使えるワード</strong><br>「耐候性」「透明度92%」「軽量（ガラスの約半分）」「解重合リサイクル」「バイオMMA」——これらのキーワードを使うと専門家に説得力を持って話せます。</p>
+            </div>
+            <h3>🏢 主要メーカー</h3>
+            <ul>
+              <li><strong>三菱ケミカル</strong>：MMAのグローバルトップシェア。「デルペット」ブランド。</li>
+              <li><strong>住友化学</strong>：PMMA樹脂「スミペックス」。</li>
+              <li><strong>Röhm（旧エボニック）</strong>：「PLEXIGLAS」で世界的に展開。</li>
+              <li><strong>Trinseo</strong>：自動車・電子部品向けアクリル。</li>
+            </ul>
+            <div>
+              <span class="keyword-chip">PMMA</span>
+              <span class="keyword-chip">バイオMMA</span>
+              <span class="keyword-chip">解重合リサイクル</span>
+              <span class="keyword-chip">耐候性</span>
+              <span class="keyword-chip">三菱ケミカル</span>
+              <span class="keyword-chip">EV軽量化</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- /tab-learn -->
+
+    <!-- ══════════════════════════════════════
+         Tab 2: Tree
+         ══════════════════════════════════════ -->
+    <section id="tab-tree" class="tab-panel" aria-label="ロジックツリー">
+      <p class="section-label">樹脂重合ロジックツリー</p>
+      <div class="tree-hint">
+        <span>👆 横スクロール・ピンチで拡大</span>
+      </div>
+      <div class="tree-container">
+        <div class="mermaid-wrap">
+          <div class="mermaid">
+flowchart TD
+  ROOT["🏭 樹脂・ポリマー製造"]:::root
+  ROOT --> A["付加重合\nAddition Polymerization"]:::cat
+  ROOT --> B["縮合重合\nCondensation Polymerization"]:::cat
+  ROOT --> C["開環重合\nRing-Opening Polymerization"]:::cat
+
+  A --> A1["ラジカル重合\nRadical Polymerization"]:::sub
+  A --> A2["カチオン重合\nCationic Polymerization"]:::sub
+  A --> A3["アニオン重合\nAnionic Polymerization"]:::sub
+  A --> A4["配位重合\nCoordination Polymerization"]:::sub
+
+  A1 --> A1a["バルク重合"]:::detail
+  A1 --> A1b["溶液重合"]:::detail
+  A1 --> A1c["乳化重合"]:::detail
+  A1 --> A1d["懸濁重合"]:::detail
+  A1 --> A1e["リビングラジカル重合\nRAFT / ATRP / NMP"]:::detail
+
+  A1a --> P1["PMMA\n（アクリル板）"]:::product
+  A1c --> P2["合成ゴム\nSBR / NBR"]:::product
+  A1d --> P3["ポリスチレン\nPS"]:::product
+
+  A4 --> P4["HDPE / LLDPE\n(チーグラー・ナッタ)"]:::product
+
+  B --> B1["ポリエステル\nPolyester"]:::sub
+  B --> B2["ポリアミド\nPolyamide"]:::sub
+  B --> B3["ポリウレタン\nPolyurethane"]:::sub
+  B --> B4["ポリカーボネート\nPolycarbonate"]:::sub
+
+  B1 --> P5["PET\n（ペットボトル）"]:::product
+  B2 --> P6["Nylon 6,6\n（繊維・歯車）"]:::product
+  B3 --> P7["フォーム・接着剤"]:::product
+  B4 --> P8["光学レンズ・CD"]:::product
+
+  C --> C1["ε-カプロラクタム"]:::sub
+  C --> C2["エポキシ"]:::sub
+  C1 --> P9["Nylon 6"]:::product
+  C2 --> P10["エポキシ樹脂\n（接着・電子基板）"]:::product
+
+  classDef root fill:#1e40af,stroke:#3b82f6,color:#fff,font-weight:bold
+  classDef cat  fill:#0f172a,stroke:#06b6d4,color:#67e8f9,font-weight:bold
+  classDef sub  fill:#0f172a,stroke:#7c3aed,color:#c4b5fd
+  classDef detail fill:#0f172a,stroke:#374151,color:#94a3b8
+  classDef product fill:#064e3b,stroke:#22c55e,color:#86efac
+          </div>
+        </div>
+      </div>
+
+      <!-- Polymer Types Quick Reference -->
+      <div style="margin-top:14px">
+        <p class="section-label">主な樹脂の特性比較</p>
+        <div class="glass-card" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+          <table style="width:100%;min-width:480px;border-collapse:collapse;font-size:12px;">
+            <thead>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">樹脂名</th>
+                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">重合方式</th>
+                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">主な特徴</th>
+                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">PMMA</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">ラジカル付加</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">透明・耐候</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">アクリル板・レンズ</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">PE</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">配位付加</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">軽量・化学耐性</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">袋・タンク</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">PET</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">縮合</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">透明・強靭</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">ボトル・フィルム</td>
+              </tr>
+              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
+                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">Nylon</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">縮合</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">高強度・耐摩耗</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">ギア・繊維</td>
+              </tr>
+              <tr>
+                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">エポキシ</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">開環・縮合</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">高接着・耐薬</td>
+                <td style="padding:8px 6px;color:var(--text-secondary);">基板・接着剤</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section><!-- /tab-tree -->
+
+    <!-- ══════════════════════════════════════
+         Tab 3: Quiz
+         ══════════════════════════════════════ -->
+    <section id="tab-quiz" class="tab-panel" aria-label="クイズモード">
+      <!-- Loading state -->
+      <div id="quiz-loading" style="text-align:center;padding:40px 20px">
+        <div style="font-size:28px;margin-bottom:12px">⏳</div>
+        <p style="color:var(--text-secondary);font-size:13px">問題データを読み込み中...</p>
+      </div>
+
+      <!-- Main quiz UI -->
+      <div id="quiz-main" style="display:none">
+        <!-- Progress -->
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+          <span id="quiz-count" style="font-size:11px;color:var(--text-muted);font-weight:600;letter-spacing:0.5px"></span>
+          <span id="quiz-score-live" style="font-size:11px;color:var(--accent-green);font-weight:600"></span>
+        </div>
+        <div class="quiz-progress-bar-wrap">
+          <div id="quiz-progress-bar" class="quiz-progress-bar" style="width:0%"></div>
+        </div>
+
+        <!-- Question area -->
+        <div id="quiz-question-area">
+          <div class="quiz-question-card">
+            <div class="quiz-q-num">QUESTION</div>
+            <p id="quiz-q-text" class="quiz-q-text">読み込み中...</p>
+          </div>
+
+          <!-- Choices -->
+          <div id="quiz-choices" class="quiz-choices"></div>
+
+          <!-- Feedback -->
+          <div id="quiz-feedback" class="quiz-feedback" role="alert">
+            <div id="feedback-title" class="feedback-title"></div>
+            <p id="feedback-explanation" class="feedback-explanation"></p>
+          </div>
+
+          <!-- Buttons -->
+          <div class="quiz-btn-row">
+            <button id="quiz-next-btn" class="btn-primary" style="display:none">
+              次の問題 →
+            </button>
+          </div>
+        </div>
+
+        <!-- Score Summary -->
+        <div id="quiz-score-summary" class="quiz-score-summary glass-card" role="status">
+          <div id="score-circle" class="score-circle">
+            <div class="score-circle-inner">
+              <div class="score-num" id="result-correct">0</div>
+              <div class="score-denom">/ <span id="result-total">0</span></div>
+            </div>
+          </div>
+          <div class="score-msg" id="result-msg"></div>
+          <div class="score-sub" id="result-sub"></div>
+          <div style="font-size:20px;font-weight:700;color:var(--accent-amber);margin-bottom:12px"
+               id="result-pct"></div>
+          <button id="quiz-retry-btn" class="btn-primary">
+            🔄 もう一度チャレンジ
+          </button>
+        </div>
+      </div>
+    </section><!-- /tab-quiz -->
+
+    <!-- ══════════════════════════════════════
+         Tab 4: Progress
+         ══════════════════════════════════════ -->
+    <section id="tab-progress" class="tab-panel" aria-label="マイページ・進捗">
+      <p class="section-label">マイページ</p>
+
+      <!-- Streak hero -->
+      <div class="progress-hero animate-in">
+        <div style="font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+                    color:var(--text-muted);margin-bottom:8px">学習ストリーク</div>
+        <div class="streak-num" id="streak-num">0</div>
+        <div class="streak-label" id="streak-label">日 連続学習中 🔥</div>
+      </div>
+
+      <!-- Stats grid -->
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-val stat-blue" id="stat-total-q">0</div>
+          <div class="stat-desc">累計問題数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val stat-green" id="stat-correct">0</div>
+          <div class="stat-desc">累計正解数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val stat-purple" id="stat-sessions">0</div>
+          <div class="stat-desc">セッション数</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-val stat-amber" id="stat-acc">0%</div>
+          <div class="stat-desc">正答率</div>
+        </div>
+      </div>
+
+      <!-- 100 day progress -->
+      <div class="glass-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+          <span style="font-size:13px;font-weight:600;color:var(--text-primary)">100日チャレンジ進捗</span>
+          <span style="font-size:12px;font-weight:600;color:var(--accent-blue)" id="days-progress-label">0 / 100日</span>
+        </div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="days-progress-bar" style="width:0%"></div>
+        </div>
+        <!-- Day dots grid -->
+        <div class="days-grid" id="days-grid"></div>
+        <div style="display:flex;gap:12px;margin-top:10px;font-size:10px;color:var(--text-muted)">
+          <span style="display:flex;align-items:center;gap:4px">
+            <span style="width:10px;height:10px;background:var(--accent-blue);border-radius:3px;display:inline-block"></span>学習済
+          </span>
+          <span style="display:flex;align-items:center;gap:4px">
+            <span style="width:10px;height:10px;background:var(--accent-amber);border-radius:3px;display:inline-block"></span>今日
+          </span>
+          <span style="display:flex;align-items:center;gap:4px">
+            <span style="width:10px;height:10px;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:3px;display:inline-block"></span>未学習
+          </span>
+        </div>
+      </div>
+
+      <!-- Motivation message -->
+      <div class="glass-card" style="background:rgba(168,85,247,0.07);border-color:rgba(168,85,247,0.25)">
+        <div style="display:flex;gap:12px;align-items:flex-start">
+          <span style="font-size:24px">💬</span>
+          <div>
+            <div style="font-size:13px;font-weight:600;color:var(--text-primary);margin-bottom:4px">今日の一言</div>
+            <p style="font-size:12.5px;color:var(--text-secondary);line-height:1.65">
+              「化学を知ることは、素材の声を聴くことだ。今日学んだポリマーの知識が、明日の商談を変える力になる。1日1ページでいい。続けよう。」
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reset button -->
+      <button id="reset-btn" class="btn-danger">🗑️ 学習データをリセット</button>
+    </section><!-- /tab-progress -->
+
+  </main><!-- /tab-content -->
+
+  <!-- Bottom Navigation -->
+  <nav id="bottom-nav" role="navigation" aria-label="メインナビゲーション">
+    <button class="nav-btn active" data-tab="learn" id="nav-learn" aria-label="読む学習モード">
+      <span class="nav-icon">📖</span>
+      <span>Learn</span>
+    </button>
+    <button class="nav-btn" data-tab="tree" id="nav-tree" aria-label="ロジックツリー">
+      <span class="nav-icon">🌳</span>
+      <span>Tree</span>
+    </button>
+    <button class="nav-btn" data-tab="quiz" id="nav-quiz" aria-label="クイズモード">
+      <span class="nav-icon">🧠</span>
+      <span>Quiz</span>
+    </button>
+    <button class="nav-btn" data-tab="progress" id="nav-progress" aria-label="進捗マイページ">
+      <span class="nav-icon">📊</span>
+      <span>Progress</span>
+    </button>
+  </nav>
+
+</div><!-- /app -->
+
+<!-- Toast notification -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<!-- Scripts -->
+<script>
+  // Mermaid init (dark theme)
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'dark',
+    themeVariables: {
+      darkMode: true,
+      background: '#0b1120',
+      primaryColor: '#1e40af',
+      primaryTextColor: '#f1f5f9',
+      primaryBorderColor: '#3b82f6',
+      lineColor: '#475569',
+      secondaryColor: '#0f172a',
+      tertiaryColor: '#0f172a'
+    },
+    flowchart: { curve: 'basis', htmlLabels: true }
+  });
+</script>
+<script src="script.js"></script>
+</body>
+</html>
