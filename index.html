@@ -10,8 +10,6 @@
   <meta name="description" content="文系営業向け・樹脂重合技術を100日で習得するモバイル学習SPAアプリ。クイズ・ロジックツリー・進捗管理機能付き。">
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Mermaid.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <!-- Custom CSS -->
   <link rel="stylesheet" href="style.css">
 </head>
@@ -236,106 +234,10 @@
     <section id="tab-tree" class="tab-panel" aria-label="ロジックツリー">
       <p class="section-label">樹脂重合ロジックツリー</p>
       <div class="tree-hint">
-        <span>👆 横スクロール・ピンチで拡大</span>
+        <span>📂 ノードをタップして展開 · 🟢 製品ノードで詳細表示</span>
       </div>
-      <div class="tree-container">
-        <div class="mermaid-wrap">
-          <div class="mermaid">
-flowchart TD
-  ROOT["🏭 樹脂・ポリマー製造"]:::root
-  ROOT --> A["付加重合\nAddition Polymerization"]:::cat
-  ROOT --> B["縮合重合\nCondensation Polymerization"]:::cat
-  ROOT --> C["開環重合\nRing-Opening Polymerization"]:::cat
-
-  A --> A1["ラジカル重合\nRadical Polymerization"]:::sub
-  A --> A2["カチオン重合\nCationic Polymerization"]:::sub
-  A --> A3["アニオン重合\nAnionic Polymerization"]:::sub
-  A --> A4["配位重合\nCoordination Polymerization"]:::sub
-
-  A1 --> A1a["バルク重合"]:::detail
-  A1 --> A1b["溶液重合"]:::detail
-  A1 --> A1c["乳化重合"]:::detail
-  A1 --> A1d["懸濁重合"]:::detail
-  A1 --> A1e["リビングラジカル重合\nRAFT / ATRP / NMP"]:::detail
-
-  A1a --> P1["PMMA\n（アクリル板）"]:::product
-  A1c --> P2["合成ゴム\nSBR / NBR"]:::product
-  A1d --> P3["ポリスチレン\nPS"]:::product
-
-  A4 --> P4["HDPE / LLDPE\n(チーグラー・ナッタ)"]:::product
-
-  B --> B1["ポリエステル\nPolyester"]:::sub
-  B --> B2["ポリアミド\nPolyamide"]:::sub
-  B --> B3["ポリウレタン\nPolyurethane"]:::sub
-  B --> B4["ポリカーボネート\nPolycarbonate"]:::sub
-
-  B1 --> P5["PET\n（ペットボトル）"]:::product
-  B2 --> P6["Nylon 6,6\n（繊維・歯車）"]:::product
-  B3 --> P7["フォーム・接着剤"]:::product
-  B4 --> P8["光学レンズ・CD"]:::product
-
-  C --> C1["ε-カプロラクタム"]:::sub
-  C --> C2["エポキシ"]:::sub
-  C1 --> P9["Nylon 6"]:::product
-  C2 --> P10["エポキシ樹脂\n（接着・電子基板）"]:::product
-
-  classDef root fill:#1e40af,stroke:#3b82f6,color:#fff,font-weight:bold
-  classDef cat  fill:#0f172a,stroke:#06b6d4,color:#67e8f9,font-weight:bold
-  classDef sub  fill:#0f172a,stroke:#7c3aed,color:#c4b5fd
-  classDef detail fill:#0f172a,stroke:#374151,color:#94a3b8
-  classDef product fill:#064e3b,stroke:#22c55e,color:#86efac
-          </div>
-        </div>
-      </div>
-
-      <!-- Polymer Types Quick Reference -->
-      <div style="margin-top:14px">
-        <p class="section-label">主な樹脂の特性比較</p>
-        <div class="glass-card" style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
-          <table style="width:100%;min-width:480px;border-collapse:collapse;font-size:12px;">
-            <thead>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
-                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">樹脂名</th>
-                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">重合方式</th>
-                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">主な特徴</th>
-                <th style="text-align:left;padding:8px 6px;color:var(--text-muted);font-weight:600;">用途</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">PMMA</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">ラジカル付加</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">透明・耐候</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">アクリル板・レンズ</td>
-              </tr>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">PE</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">配位付加</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">軽量・化学耐性</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">袋・タンク</td>
-              </tr>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">PET</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">縮合</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">透明・強靭</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">ボトル・フィルム</td>
-              </tr>
-              <tr style="border-bottom:1px solid rgba(255,255,255,0.05);">
-                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">Nylon</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">縮合</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">高強度・耐摩耗</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">ギア・繊維</td>
-              </tr>
-              <tr>
-                <td style="padding:8px 6px;color:#93c5fd;font-weight:600;">エポキシ</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">開環・縮合</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">高接着・耐薬</td>
-                <td style="padding:8px 6px;color:var(--text-secondary);">基板・接着剤</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
+      <!-- Interactive tree mounts here -->
+      <div id="itree-mount" class="itree-root"></div>
     </section><!-- /tab-tree -->
 
     <!-- ══════════════════════════════════════
@@ -505,24 +407,7 @@ flowchart TD
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
 <!-- Scripts -->
-<script>
-  // Mermaid init (dark theme)
-  mermaid.initialize({
-    startOnLoad: false,
-    theme: 'dark',
-    themeVariables: {
-      darkMode: true,
-      background: '#0b1120',
-      primaryColor: '#1e40af',
-      primaryTextColor: '#f1f5f9',
-      primaryBorderColor: '#3b82f6',
-      lineColor: '#475569',
-      secondaryColor: '#0f172a',
-      tertiaryColor: '#0f172a'
-    },
-    flowchart: { curve: 'basis', htmlLabels: true }
-  });
-</script>
 <script src="script.js"></script>
+
 </body>
 </html>
