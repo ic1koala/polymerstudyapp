@@ -3,19 +3,9 @@
    Tab switching · Accordion · Quiz (CSV) · Progress
    ======================================================== */
 
-/* ── Inline fallback quiz data (used when CSV fetch fails e.g. file://) ── */
-const FALLBACK_QUESTIONS = [
-  { id:'1', question:'ポリマー（polymer）という言葉の語源として正しいものはどれですか？', choice1:'poly（多い）＋ mer（部分）', choice2:'poly（重い）＋ mer（分子）', choice3:'poly（強い）＋ mer（結合）', choice4:'poly（硬い）＋ mer（素材）', answer:'1', explanation:'ポリマーはギリシャ語の「poly（多い）」と「mer（部分・単位）」が語源です。つまり「多くの繰り返し単位からできたもの」という意味で、モノマーが多数結合した高分子化合物のことです。' },
-  { id:'2', question:'アクリル樹脂の原料となるモノマーは次のうちどれですか？', choice1:'スチレン', choice2:'アクリル酸メチル（メチルアクリレート）', choice3:'エチレン', choice4:'プロピレン', answer:'2', explanation:'アクリル樹脂はアクリル酸エステル（アクリル酸メチル等）やメタクリル酸エステル（MMA）を原料とするモノマーが重合して作られます。MMAから作られるPMMAは透明度が高く「有機ガラス」とも呼ばれます。' },
-  { id:'3', question:'ラジカル重合において、連鎖反応を開始させる役割を担う化学種はどれですか？', choice1:'カチオン（陽イオン）', choice2:'アニオン（陰イオン）', choice3:'ラジカル（フリーラジカル）', choice4:'金属触媒', answer:'3', explanation:'ラジカル重合では、熱や光などのエネルギーによって開始剤が分解し、不対電子を持つ「ラジカル」が生成します。このラジカルがモノマーと反応して連鎖的に重合が進みます。' },
-  { id:'4', question:'縮合重合（縮重合）の特徴として正しいものはどれですか？', choice1:'モノマーが次々と連鎖して成長する', choice2:'副生成物（水など）を生成しながら結合する', choice3:'ラジカルが連鎖担体となる', choice4:'酸素が必要', answer:'2', explanation:'縮合重合では、2つの官能基（例：-OHと-COOH）が反応するたびに水やアルコールなどの小分子（副生成物）が生成します。ナイロンやポリエステルがこの方法で作られます。' },
-  { id:'5', question:'PMMAが「有機ガラス」とも呼ばれる主な理由はどれですか？', choice1:'電気を通しやすいため', choice2:'ガラスよりも硬いため', choice3:'透明度が非常に高く、ガラスの代替として使えるため', choice4:'水に溶けないため', answer:'3', explanation:'PMMA（ポリメタクリル酸メチル）は光線透過率が約92%とガラスに匹敵する透明度を持ちます。また軽量で割れにくいため、水槽・看板・光学レンズなどガラス代替品として広く使われ「有機ガラス」と呼ばれます。' },
-  { id:'6', question:'付加重合（addition polymerization）とはどんな反応ですか？', choice1:'モノマー同士が縮合して水を放出しながら結合する', choice2:'二重結合や三重結合を持つモノマーが開環・付加して鎖状に結合する反応', choice3:'金属イオンを介して結合する反応', choice4:'高温高圧でのみ起こる反応', answer:'2', explanation:'付加重合は炭素-炭素二重結合が開いてモノマー同士が次々と付加的に結合していく反応です。副生成物は生成されず、モノマーの分子量がそのままポリマーに活かされます。PE、PP、PSなどが代表例です。' },
-  { id:'7', question:'熱可塑性樹脂（thermoplastic）の最大の特徴はどれですか？', choice1:'加熱すると硬化し、再溶融できない', choice2:'加熱すると軟化・溶融し、冷却すると再び固まる', choice3:'水に溶ける', choice4:'電気を通す', answer:'2', explanation:'熱可塑性樹脂は加熱することで軟化・溶融し、冷却すると再度固化します。この特性はリサイクルしやすい利点があります。PE、PP、PETなどが代表例です。' },
-  { id:'8', question:'熱硬化性樹脂（thermosetting resin）の説明として正しいものはどれですか？', choice1:'加熱すると溶け、成形が容易', choice2:'加熱によって三次元架橋構造を形成し、再溶融できない', choice3:'常温でも液体のまま', choice4:'水に溶けやすい', answer:'2', explanation:'熱硬化性樹脂は加熱によってモノマーや低分子量ポリマーが三次元的に架橋し、硬化します。一度硬化すると再融解しないため成形加工は一度限りですが、耐熱性・耐薬品性に優れます。エポキシ・フェノール樹脂などが代表例です。' },
-  { id:'9', question:'アクリル系塗料が自動車や建築外装に広く使われる主な理由はどれですか？', choice1:'価格が非常に安価なため', choice2:'耐候性・耐紫外線性が高く、光沢が長持ちするため', choice3:'水に溶けず施工が難しいため', choice4:'重量が軽いため', answer:'2', explanation:'アクリル系塗料はアクリル樹脂を主成分とし、紫外線や雨風に対する耐候性が非常に高いのが特徴です。また色相の安定性・光沢保持性も優れているため、自動車のトップコートや建築外壁塗装に広く使われています。' },
-  { id:'10', question:'重合度（degree of polymerization）とは何を表す指標ですか？', choice1:'ポリマーの硬さの指標', choice2:'1本のポリマー鎖に含まれるモノマー単位の繰り返し数', choice3:'ポリマーの溶融温度', choice4:'ポリマーの密度', answer:'2', explanation:'重合度はポリマー1分子中に含まれるモノマー単位（繰り返し単位）の数です。重合度が大きいほど分子量が高く、強度・粘度などの物性に影響します。' }
-];
+// Global expanded databases loaded from quiz-data.js and polymer-db.js
+// window.QUIZ_DATA (100 questions)
+// window.POLYMER_DB (30 polymers with SVGs)
 
 'use strict';
 
@@ -444,6 +434,7 @@ function initTabs() {
         p.classList.toggle('active', isMatch);
       });
       if (target === 'tree')     buildTree();
+      if (target === 'db')       initDB();
       if (target === 'progress') renderProgress();
     });
   });
@@ -496,34 +487,79 @@ function shuffle(arr) {
   return a;
 }
 
-/* ── Load CSV (with inline fallback for file:// access) ── */
-async function loadQuestions() {
-  try {
-    // Fetch will fail under file:// due to CORS — catch and use fallback
-    if (location.protocol === 'file:') throw new Error('file protocol');
-    const res = await fetch('./data/test.csv');
-    if (!res.ok) throw new Error('fetch failed');
-    const text = await res.text();
-    allQuestions = parseCSV(text);
-  } catch (e) {
-    console.info('CSV fetch skipped, using inline fallback:', e.message);
-    allQuestions = FALLBACK_QUESTIONS;
-  }
-  initQuiz();
+/* ── Load expanded quiz data ── */
+function loadQuestions() {
+  allQuestions = window.QUIZ_DATA || [];
+  initQuizSetup();
 }
 
-/* ── Quiz ── */
-function initQuiz() {
+/* ── Quiz Setup & Initializer ── */
+let selectedCategory = 'all';
+let selectedCount = '10';
+
+function initQuizSetup() {
   document.getElementById('quiz-loading').style.display = 'none';
-  document.getElementById('quiz-main').style.display = 'block';
-  startQuizSession();
+  document.getElementById('quiz-setup').style.display = 'block';
+  document.getElementById('quiz-main').style.display = 'none';
+
+  // Setup category selection buttons click listeners
+  const catBtns = document.querySelectorAll('#quiz-cat-selector .filter-chip');
+  catBtns.forEach(btn => {
+    btn.removeEventListener('click', handleCatClick);
+    btn.addEventListener('click', handleCatClick);
+  });
+
+  // Setup count selection buttons click listeners
+  const countBtns = document.querySelectorAll('#quiz-count-selector .filter-chip');
+  countBtns.forEach(btn => {
+    btn.removeEventListener('click', handleCountClick);
+    btn.addEventListener('click', handleCountClick);
+  });
+
+  // Start button listener (bind only once)
+  const startBtn = document.getElementById('quiz-start-btn');
+  if (startBtn && !startBtn._bound) {
+    startBtn._bound = true;
+    startBtn.addEventListener('click', () => {
+      document.getElementById('quiz-setup').style.display = 'none';
+      document.getElementById('quiz-main').style.display = 'block';
+      startCustomQuizSession(selectedCategory, selectedCount);
+    });
+  }
 }
 
-function startQuizSession(count = 10) {
-  currentSession.questions = shuffle(allQuestions).slice(0, Math.min(count, allQuestions.length));
+function handleCatClick(e) {
+  const catBtns = document.querySelectorAll('#quiz-cat-selector .filter-chip');
+  catBtns.forEach(b => b.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  selectedCategory = e.currentTarget.dataset.cat;
+}
+
+function handleCountClick(e) {
+  const countBtns = document.querySelectorAll('#quiz-count-selector .filter-chip');
+  countBtns.forEach(b => b.classList.remove('active'));
+  e.currentTarget.classList.add('active');
+  selectedCount = e.currentTarget.dataset.count;
+}
+
+function startCustomQuizSession(category, count) {
+  // Filter by category
+  let filtered = allQuestions;
+  if (category !== 'all') {
+    filtered = allQuestions.filter(q => q.cat === category);
+  }
+
+  // Slice by count
+  let actualCount = filtered.length;
+  if (count !== 'all') {
+    actualCount = Math.min(parseInt(count), filtered.length);
+  }
+
+  currentSession.questions = shuffle(filtered).slice(0, actualCount);
   currentSession.index = 0;
   currentSession.correct = 0;
   currentSession.answered = false;
+
   document.getElementById('quiz-score-summary').classList.remove('show');
   document.getElementById('quiz-question-area').style.display = 'block';
   renderQuestion();
@@ -537,6 +573,8 @@ function renderQuestion() {
   // Progress bar
   document.getElementById('quiz-progress-bar').style.width = `${(index / total) * 100}%`;
   document.getElementById('quiz-count').textContent = `Q${index + 1} / ${total}`;
+  const catEl = document.getElementById('quiz-q-category');
+  if (catEl) catEl.textContent = `Q${index + 1} / ${total} • [${q.cat}]`;
 
   // Question text
   document.getElementById('quiz-q-text').textContent = q.question;
@@ -685,6 +723,175 @@ function resetAllData() {
   showToast('🗑️ データをリセットしました');
 }
 
+/* ── Chemistry Database Tab ── */
+let dbActiveCategory = 'all';
+let dbSearchQuery = '';
+
+function initDB() {
+  // Render grid for the first time
+  filterDB();
+
+  // Search input event
+  const searchInput = document.getElementById('db-search');
+  const clearBtn = document.getElementById('db-search-clear');
+  
+  if (searchInput && !searchInput._bound) {
+    searchInput._bound = true;
+    searchInput.addEventListener('input', (e) => {
+      dbSearchQuery = e.target.value.toLowerCase().trim();
+      if (clearBtn) clearBtn.classList.toggle('hidden', dbSearchQuery === '');
+      filterDB();
+    });
+  }
+
+  if (clearBtn && !clearBtn._bound) {
+    clearBtn._bound = true;
+    clearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      clearBtn.classList.add('hidden');
+      dbSearchQuery = '';
+      filterDB();
+    });
+  }
+
+  // Filter chips click delegation
+  const chipsContainer = document.getElementById('db-filter-chips');
+  if (chipsContainer && !chipsContainer._bound) {
+    chipsContainer._bound = true;
+    chipsContainer.addEventListener('click', (e) => {
+      const chip = e.target.closest('.filter-chip');
+      if (chip) {
+        document.querySelectorAll('#db-filter-chips .filter-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+        dbActiveCategory = chip.dataset.cat;
+        filterDB();
+      }
+    });
+  }
+
+  // Grid click delegation to open modal
+  const grid = document.getElementById('db-grid');
+  if (grid && !grid._bound) {
+    grid._bound = true;
+    grid.addEventListener('click', (e) => {
+      const card = e.target.closest('.db-card');
+      if (card) {
+        openPolymerDetail(card.dataset.id);
+      }
+    });
+  }
+
+  // Modal close handlers
+  const closeBtn = document.getElementById('modal-close');
+  if (closeBtn && !closeBtn._bound) {
+    closeBtn._bound = true;
+    closeBtn.addEventListener('click', closePolymerModal);
+  }
+
+  const modal = document.getElementById('db-modal');
+  if (modal && !modal._bound) {
+    modal._bound = true;
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closePolymerModal();
+      }
+    });
+  }
+}
+
+function filterDB() {
+  const db = window.POLYMER_DB || [];
+  
+  const filtered = db.filter(p => {
+    // Category match
+    const matchesCat = dbActiveCategory === 'all' || p.category === dbActiveCategory;
+    
+    // Search match
+    const textToSearch = [
+      p.name, p.fullName, p.formula, p.monomer, p.polymerization, p.category, 
+      p.trend, ...p.usage, ...p.makers, ...p.tags
+    ].join(' ').toLowerCase();
+    const matchesSearch = dbSearchQuery === '' || textToSearch.includes(dbSearchQuery);
+    
+    return matchesCat && matchesSearch;
+  });
+
+  renderDBGrid(filtered);
+}
+
+function renderDBGrid(data) {
+  const grid = document.getElementById('db-grid');
+  const empty = document.getElementById('db-empty');
+  if (!grid) return;
+  
+  grid.innerHTML = '';
+  
+  if (data.length === 0) {
+    grid.classList.add('hidden');
+    if (empty) empty.classList.remove('hidden');
+    return;
+  }
+  
+  if (empty) empty.classList.add('hidden');
+  grid.classList.remove('hidden');
+
+  data.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'db-card animate-in';
+    card.dataset.id = p.id;
+    card.innerHTML = `
+      <div>
+        <div class="db-card-title">${p.name}</div>
+        <div class="db-card-fullname">${p.fullName}</div>
+      </div>
+      <div class="db-card-footer">
+        <span class="db-card-cat">${p.category}</span>
+        <span class="db-card-arrow">▶</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function openPolymerDetail(id) {
+  const db = window.POLYMER_DB || [];
+  const p = db.find(x => x.id === id);
+  if (!p) return;
+
+  document.getElementById('modal-title').textContent = p.name;
+  document.getElementById('modal-badge').textContent = p.category;
+  document.getElementById('modal-fullname').textContent = p.fullName;
+  document.getElementById('modal-formula').textContent = p.formula;
+  document.getElementById('modal-svg').innerHTML = p.svg;
+  
+  document.getElementById('prop-density').textContent = p.properties.density;
+  document.getElementById('prop-tg').textContent = p.properties.Tg;
+  document.getElementById('prop-tm').textContent = p.properties.Tm;
+  document.getElementById('prop-tensile').textContent = p.properties.tensile;
+  document.getElementById('prop-transparency').textContent = p.properties.transparency;
+  document.getElementById('prop-heat').textContent = p.properties.heatResist;
+  
+  document.getElementById('modal-monomer').textContent = p.monomer;
+  document.getElementById('modal-polymerization').textContent = p.polymerization;
+  
+  const usageList = document.getElementById('modal-usage');
+  usageList.innerHTML = p.usage.map(u => `<li>${u}</li>`).join('');
+  
+  const makersList = document.getElementById('modal-makers');
+  makersList.innerHTML = p.makers.map(m => `<li>${m}</li>`).join('');
+  
+  document.getElementById('modal-trend').innerHTML = `📌 <strong>業界トレンド・環境対応:</strong><br>${p.trend}`;
+  
+  const tagsContainer = document.getElementById('modal-tags');
+  tagsContainer.innerHTML = p.tags.map(t => `<span class="keyword-chip" style="background:rgba(6,182,212,0.15);border-color:rgba(6,182,212,0.3);color:#67e8f9">${t}</span>`).join('');
+
+  document.getElementById('db-modal').classList.remove('hidden');
+}
+
+function closePolymerModal() {
+  document.getElementById('db-modal').classList.add('hidden');
+}
+
 /* ── Init ── */
 document.addEventListener('DOMContentLoaded', () => {
   initTabs();
@@ -694,8 +901,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Next button
   document.getElementById('quiz-next-btn')?.addEventListener('click', nextQuestion);
-  // Retry button
-  document.getElementById('quiz-retry-btn')?.addEventListener('click', () => startQuizSession(10));
+  
+  // Retry button (shows Setup Screen)
+  document.getElementById('quiz-retry-btn')?.addEventListener('click', () => {
+    document.getElementById('quiz-setup').style.display = 'block';
+    document.getElementById('quiz-main').style.display = 'none';
+  });
+  
   // Reset
   document.getElementById('reset-btn')?.addEventListener('click', resetAllData);
 });
